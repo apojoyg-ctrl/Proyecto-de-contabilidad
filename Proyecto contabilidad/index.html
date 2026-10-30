@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contabilidad Administrativa | Portal Educativo UMG</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js para visualización de datos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        umg: {
+                            blue: '#002855',      // Azul Mariano Principal
+                            gold: '#D4AF37',      // Dorado Accent
+                            red: '#990000',       // Rojo Institucional
+                            dark: '#0f172a',
+                            light: '#f8fafc',
+                            card: '#f1f5f9'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .umg-gradient {
+            background: linear-gradient(135deg, #002855 0%, #001833 100%);
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #D4AF37 0%, #AA820A 100%);
+        }
+        .tab-btn.active {
+            border-bottom: 3px solid #D4AF37;
+            color: #002855;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased flex flex-col min-h-screen">
+
+    <!-- STICKY NAVBAR -->
+    <header class="sticky top-0 z-50 bg-umg-blue text-white shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo & Brand -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-white rounded-lg p-1 flex items-center justify-center shadow-md">
+                        <i class="fa-solid fa-graduation-cap text-umg-blue text-2xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-bold tracking-tight text-white block">UMG Digital</span>
+                        <span class="text-xs text-umg-gold font-medium uppercase tracking-wider">Contabilidad Administrativa</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex space-x-1 xl:space-x-4">
+                    <a href="#inicio" class="px-3 py-2 rounded-md text-sm font-medium hover:text-umg-gold hover:bg-white/5 transition-colors">Inicio</a>
+                    <a href="#fundamentos" class="px-3 py-2 rounded-md text-sm font-medium hover:text-umg-gold hover:bg-white/5 transition-colors">Fundamentos Web</a>
+                    <a href="#teoria" class="px-3 py-2 rounded-md text-sm font-medium hover:text-umg-gold hover:bg-white/5 transition-colors">Aspectos Teóricos</a>
+                    <a href="#herramientas" class="px-3 py-2 rounded-md text-sm font-medium hover:text-umg-gold hover:bg-white/5 transition-colors">Herramientas de Gestión</a>
+                    <a href="#calculadoras" class="px-3 py-2 rounded-md text-sm font-medium bg-umg-gold text-umg-blue font-semibold hover:bg-yellow-400 transition-colors shadow">Práctica Interactive</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-btn" type="button" class="text-gray-300 hover:text-white p-2 rounded-md focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-umg-blue border-t border-blue-900/50 px-4 pt-2 pb-6 space-y-2">
+            <a href="#inicio" class="mobile-link block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">Inicio</a>
+            <a href="#fundamentos" class="mobile-link block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">Fundamentos Web</a>
+            <a href="#teoria" class="mobile-link block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">Aspectos Teóricos</a>
+            <a href="#herramientas" class="mobile-link block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10">Herramientas de Gestión</a>
+            <a href="#calculadoras" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-umg-gold font-bold hover:bg-white/10">Práctica Interactiva</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="inicio" class="umg-gradient text-white py-16 md:py-24 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center space-x-2 bg-white/10 border border-white/20 backdrop-blur-md px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold text-umg-gold">
+                        <i class="fa-solid fa-university"></i>
+                        <span>Universidad Mariano Gálvez de Guatemala</span>
+                    </div>
+                    <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+                        Recurso Digital para <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-umg-gold to-yellow-500">Contabilidad Administrativa</span>
+                    </h1>
+                    <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0">
+                        Una plataforma integral e interactiva orientada al aprendizaje estratégico de la toma de decisiones gerenciales, evaluación de proyectos y gestión financiera del entorno empresarial.
+                    </p>
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
+                        <a href="#teoria" class="px-6 py-3 rounded-lg bg-umg-gold text-umg-blue font-bold hover:bg-yellow-400 transition-all shadow-lg flex items-center space-x-2">
+                            <span>Explorar Teoría</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                        <a href="#calculadoras" class="px-6 py-3 rounded-lg border-2 border-white/30 hover:border-white hover:bg-white/10 font-medium transition-all flex items-center space-x-2">
+                            <i class="fa-solid fa-calculator text-umg-gold"></i>
+                            <span>Calculadoras Prácticas</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-full max-w-md bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-6 shadow-2xl">
+                        <div class="flex items-center space-x-4 mb-6 border-b border-white/10 pb-4">
+                            <div class="w-10 h-10 rounded-full bg-umg-gold text-umg-blue flex items-center justify-center font-bold text-lg">
+                                UMG
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-semibold text-white">Resumen Ejecutivo del Curso</h3>
+                                <p class="text-xs text-slate-300">Contabilidad de Gestión Gerencial</p>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="bg-white/5 p-3 rounded-lg flex items-center justify-between border border-white/5">
+                                <span class="text-xs text-slate-200"><i class="fa-solid fa-check text-green-400 mr-2"></i>Fundamentos Web</span>
+                                <span class="text-xs bg-green-500/20 text-green-300 px-2 py-0.5 rounded">UX / UI</span>
+                            </div>
+                            <div class="bg-white/5 p-3 rounded-lg flex items-center justify-between border border-white/5">
+                                <span class="text-xs text-slate-200"><i class="fa-solid fa-check text-green-400 mr-2"></i>Diferenciación de Costos</span>
+                                <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded">Teoría</span>
+                            </div>
+                            <div class="bg-white/5 p-3 rounded-lg flex items-center justify-between border border-white/5">
+                                <span class="text-xs text-slate-200"><i class="fa-solid fa-check text-green-400 mr-2"></i>Herramientas de Evaluación</span>
+                                <span class="text-xs bg-yellow-500/20 text-yellow-300 px-2 py-0.5 rounded">Gestión</span>
+                            </div>
+                            <div class="bg-white/5 p-3 rounded-lg flex items-center justify-between border border-white/5">
+                                <span class="text-xs text-slate-200"><i class="fa-solid fa-check text-green-400 mr-2"></i>Modelos VAN / TIR & Marginal</span>
+                                <span class="text-xs bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded">Interactivos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 1: FUNDAMENTOS DE CREACIÓN WEB -->
+    <section id="fundamentos" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-bold text-umg-red uppercase tracking-wider">Módulo I</span>
+                <h2 class="text-3xl font-bold text-umg-blue mt-1">1. Fundamentos de Creación Web</h2>
+                <div class="w-16 h-1 bg-umg-gold mx-auto my-3 rounded-full"></div>
+                <p class="text-slate-600 text-sm sm:text-base">
+                    Aspectos de diseño, arquitectura e interacción aplicados en el desarrollo de este portal para maximizar la accesibilidad y compresión del contenido educativo.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all border-t-4 border-t-umg-blue">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-umg-blue mb-4">
+                        <i class="fa-solid fa-mobile-screen text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-800 mb-2">Diseño Adaptable (Responsive)</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        Construcción mediante patrones dinámicos que garantizan una navegación fluida e idéntica calidad visual en smartphones, tablets y monitores de escritorio.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all border-t-4 border-t-umg-gold">
+                    <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center text-umg-blue mb-4">
+                        <i class="fa-solid fa-palette text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-800 mb-2">Identidad UMG</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        Aplicación estricta de la paleta oficial: Azul Mariano (#002855) para transmitir solidez académica y Dorado (#D4AF37) para resaltar elementos clave e interactivos.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all border-t-4 border-t-umg-red">
+                    <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center text-umg-red mb-4">
+                        <i class="fa-solid fa-font text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-800 mb-2">Tipografía & Legibilidad</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        Uso de la tipografía sans-serif 'Inter' optimizada para pantallas digitales, manteniendo un alto contraste y jerarquía clara entre títulos, conceptos y fórmulas.
+                    </p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all border-t-4 border-t-slate-700">
+                    <div class="w-12 h-12 bg-slate-200 rounded-lg flex items-center justify-center text-slate-800 mb-4">
+                        <i class="fa-solid fa-sitemap text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-800 mb-2">Estructura Modular UX</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        Organización secuencial de contenidos que guía al estudiante desde la teoría conceptual hasta el análisis cuantitativo y la simulación interactiva.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 2: ASPECTOS TEÓRICOS -->
+    <section id="teoria" class="py-16 bg-slate-100 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-bold text-umg-red uppercase tracking-wider">Módulo II</span>
+                <h2 class="text-3xl font-bold text-umg-blue mt-1">2. Contabilidad Administrativa (Aspectos Teóricos)</h2>
+                <div class="w-16 h-1 bg-umg-gold mx-auto my-3 rounded-full"></div>
+                <p class="text-slate-600 text-sm sm:text-base">
+                    Conceptos clave, objetivos estratégicos y la necesaria diferenciación entre las tres ramas fundamentales de la ciencia contable.
+                </p>
+            </div>
+
+            <!-- Definición y Objetivos -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <i class="fa-solid fa-book-bookmark text-2xl text-umg-blue"></i>
+                        <h3 class="text-xl font-bold text-umg-blue">¿Qué es la Contabilidad Administrativa?</h3>
+                    </div>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                        Es un sistema de información al servicio de las necesidades internas de la gerencia, orientado a facilitar las funciones de planeación, control operacional y toma de decisiones tácticas y estratégicas.
+                    </p>
+                    <div class="bg-blue-50 border-l-4 border-umg-blue p-4 rounded-r-lg">
+                        <p class="text-xs text-umg-blue font-semibold">
+                            "A diferencia de la contabilidad fiscal o financiera, no está sujeta a normas internacionales rígidas (NIIF), enfocándose en la utilidad práctica interna."
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <i class="fa-solid fa-bullseye text-2xl text-umg-red"></i>
+                        <h3 class="text-xl font-bold text-umg-blue">Objetivos Fundamentales</h3>
+                    </div>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-circle-check text-green-500 mt-1 mr-2 flex-shrink-0"></i>
+                            <span><strong>Proveer información:</strong> Para el costeado de productos, servicios y otras áreas de interés estratégico.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-circle-check text-green-500 mt-1 mr-2 flex-shrink-0"></i>
+                            <span><strong>Alentar la planeación:</strong> A través de presupuestos y modelos de proyección a corto y largo plazo.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-circle-check text-green-500 mt-1 mr-2 flex-shrink-0"></i>
+                            <span><strong>Facilitar el control:</strong> Comparando los resultados reales contra las metas presupuestadas (Análisis de variaciones).</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- TABLA COMPARATIVA -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden mb-8">
+                <div class="bg-umg-blue text-white px-6 py-4 flex items-center justify-between">
+                    <h3 class="text-lg font-bold flex items-center">
+                        <i class="fa-solid fa-table-list mr-2 text-umg-gold"></i>
+                        Cuadro Comparativo: Las 3 Ramas de la Contabilidad
+                    </h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs sm:text-sm text-slate-600">
+                        <thead class="bg-slate-50 text-slate-700 uppercase font-bold border-b border-slate-200">
+                            <tr>
+                                <th class="py-4 px-6">Criterio de Criterio</th>
+                                <th class="py-4 px-6 text-blue-900 bg-blue-50/50">Contabilidad Administrativa</th>
+                                <th class="py-4 px-6">Contabilidad Financiera</th>
+                                <th class="py-4 px-6">Contabilidad de Costos</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr>
+                                <td class="py-4 px-6 font-semibold text-slate-800">Usuarios Principales</td>
+                                <td class="py-4 px-6 bg-blue-50/30 font-medium text-slate-900">Internos (Directores, Gerentes, Jefes de área)</td>
+                                <td class="py-4 px-6">Externos (Bancos, Inversionistas, SAT, Accionistas)</td>
+                                <td class="py-4 px-6">Internos (Gerentes de Producción y Operaciones)</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-6 font-semibold text-slate-800">Enfoque Temporal</td>
+                                <td class="py-4 px-6 bg-blue-50/30 font-medium text-slate-900">Prospectivo (Enfocada en el Futuro)</td>
+                                <td class="py-4 px-6">Histórico (Enfocada en el Pasado)</td>
+                                <td class="py-4 px-6">Histórico y Predictivo (Costos Estándar)</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-6 font-semibold text-slate-800">Regulación Normativa</td>
+                                <td class="py-4 px-6 bg-blue-50/30 font-medium text-slate-900">Sin regulaciones obligatorias (A medida)</td>
+                                <td class="py-4 px-6">Obligatoria (NIIF / NIC / Normas Legales)</td>
+                                <td class="py-4 px-6">Flexible (Basada en métodos de acumulación)</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-6 font-semibold text-slate-800">Propósito Final</td>
+                                <td class="py-4 px-6 bg-blue-50/30 font-medium text-slate-900">Toma de decisiones e incremento de eficiencia</td>
+                                <td class="py-4 px-6">Proporcionar Estados Financieros confiables</td>
+                                <td class="py-4 px-6">Valuar inventarios y fijar precios de venta</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 3: HERRAMIENTAS DE GESTIÓN PRÁCTICA -->
+    <section id="herramientas" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-bold text-umg-red uppercase tracking-wider">Módulo III</span>
+                <h2 class="text-3xl font-bold text-umg-blue mt-1">3. Herramientas de Gestión Práctica</h2>
+                <div class="w-16 h-1 bg-umg-gold mx-auto my-3 rounded-full"></div>
+                <p class="text-slate-600 text-sm sm:text-base">
+                    Análisis detallado de metodologías clave utilizadas por la alta dirección para medir eficiencia, valorar el efectivo y proyectar la rentabilidad del negocio.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Herramienta 1 -->
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200 hover:shadow-xl transition-all">
+                    <div class="w-12 h-12 bg-blue-900 text-umg-gold rounded-xl flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-umg-blue mb-2">1. Medición de Rentabilidad & Eficiencia</h3>
+                    <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+                        Indicadores clave para evaluar la eficiencia con la que la empresa utiliza sus activos y capital propio.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="bg-white p-2.5 rounded border border-slate-200 text-xs">
+                            <span class="font-bold text-slate-800">ROA (Return on Assets):</span> Utilidad Neta / Activos Totales
+                        </div>
+                        <div class="bg-white p-2.5 rounded border border-slate-200 text-xs">
+                            <span class="font-bold text-slate-800">ROE (Return on Equity):</span> Utilidad Neta / Patrimonio
+                        </div>
+                        <div class="bg-white p-2.5 rounded border border-slate-200 text-xs">
+                            <span class="font-bold text-slate-800">Margen Operativo:</span> Utilidad Operativa / Ventas Netas
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Herramienta 2 -->
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200 hover:shadow-xl transition-all">
+                    <div class="w-12 h-12 bg-blue-900 text-umg-gold rounded-xl flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-money-bill-transfer"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-umg-blue mb-2">2. Análisis del Flujo de Efectivo</h3>
+                    <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+                        Mide la capacidad de la empresa para generar liquidez real a través de sus tres actividades fundamentales:
+                    </p>
+                    <ul class="text-xs space-y-2 text-slate-700">
+                        <li class="bg-white p-2 rounded border border-slate-200"><strong>• Operación:</strong> Ingresos y pagos por la actividad principal.</li>
+                        <li class="bg-white p-2 rounded border border-slate-200"><strong>• Inversión:</strong> Compra o venta de activos fijos.</li>
+                        <li class="bg-white p-2 rounded border border-slate-200"><strong>• Financiación:</strong> Créditos, préstamos y aportes de capital.</li>
+                    </ul>
+                </div>
+
+                <!-- Herramienta 3 -->
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200 hover:shadow-xl transition-all">
+                    <div class="w-12 h-12 bg-blue-900 text-umg-gold rounded-xl flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-industry"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-umg-blue mb-2">3. Decisiones de Comprar o Producir</h3>
+                    <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+                        Análisis incremental o marginal para determinar si es más rentable fabricar un componente internamente o subcontratarlo.
+                    </p>
+                    <div class="bg-white p-3 rounded-lg border border-slate-200 text-xs space-y-1">
+                        <p class="font-semibold text-slate-800">Factores Clave:</p>
+                        <p class="text-slate-600">• Costos Variables Relevantes.</p>
+                        <p class="text-slate-600">• Eliminación de Costos Fijos Directos.</p>
+                        <p class="text-slate-600">• Aprovechamiento de Capacidad Ociosa.</p>
+                    </div>
+                </div>
+
+                <!-- Herramienta 4 -->
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200 hover:shadow-xl transition-all">
+                    <div class="w-12 h-12 bg-blue-900 text-umg-gold rounded-xl flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-scale-balanced"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-umg-blue mb-2">4. Análisis Patrimonial</h3>
+                    <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+                        Estudio de la estructura financiera, equilibrio de balance y nivel de solvencia para mitigar riesgos de quiebra.
+                    </p>
+                    <div class="space-y-2 text-xs">
+                        <div class="bg-white p-2 rounded border border-slate-200"><strong>Liquidez Corriente:</strong> Activo Corriente / Pasivo Corriente</div>
+                        <div class="bg-white p-2 rounded border border-slate-200"><strong>Nivel de Endeudamiento:</strong> Pasivo Total / Activo Total</div>
+                    </div>
+                </div>
+
+                <!-- Herramienta 5 & 6 -->
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200 hover:shadow-xl transition-all md:col-span-2 lg:col-span-2">
+                    <div class="w-12 h-12 bg-blue-900 text-umg-gold rounded-xl flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-calculator"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-umg-blue mb-2">5. Proyección Financiera (VAN y TIR)</h3>
+                    <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+                        Criterios matemáticos fundamentales para la evaluación de proyectos de inversión a largo plazo:
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                        <div class="bg-white p-3 rounded-lg border border-slate-200">
+                            <span class="font-bold text-umg-blue block mb-1">Valor Actual Neto (VAN):</span>
+                            Trae al presente los flujos de caja futuros descontados a una tasa de interés. 
+                            <br><span class="text-green-600 font-semibold">Criterio: Si VAN > 0, el proyecto se acepta.</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-slate-200">
+                            <span class="font-bold text-umg-blue block mb-1">Tasa Interna de Retorno (TIR):</span>
+                            Es la tasa de descuento que hace que el VAN de la inversión sea exactamente igual a cero.
+                            <br><span class="text-green-600 font-semibold">Criterio: Si TIR > Tasa de Descuento, es rentable.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN INTERACTIVA PRÁCTICA (CALCULADORAS JS) -->
+    <section id="calculadoras" class="py-16 bg-slate-900 text-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-bold text-umg-gold uppercase tracking-wider">Laboratorio Práctico</span>
+                <h2 class="text-3xl font-bold text-white mt-1">Calculadoras de Gestión Financiera</h2>
+                <div class="w-16 h-1 bg-umg-gold mx-auto my-3 rounded-full"></div>
+                <p class="text-slate-300 text-sm sm:text-base">
+                    Simula escenarios reales de toma de decisiones utilizando las calculadoras financieras automatizadas.
+                </p>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="flex justify-center border-b border-slate-700 mb-8 space-x-4">
+                <button id="tab-van-btn" onclick="switchTab('van')" class="tab-btn active text-white py-3 px-6 font-medium text-sm sm:text-base focus:outline-none transition-colors">
+                    <i class="fa-solid fa-chart-pie mr-2"></i>Calculadora VAN y TIR
+                </button>
+                <button id="tab-comprar-btn" onclick="switchTab('comprar')" class="tab-btn text-slate-400 py-3 px-6 font-medium text-sm sm:text-base focus:outline-none transition-colors">
+                    <i class="fa-solid fa-boxes-packing mr-2"></i>Comprar vs. Producir
+                </button>
+            </div>
+
+            <!-- TAB 1: VAN Y TIR -->
+            <div id="tab-van" class="block">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <!-- Form Control -->
+                    <div class="lg:col-span-5 bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-lg">
+                        <h3 class="text-lg font-bold text-white mb-4 flex items-center">
+                            <i class="fa-solid fa-sliders text-umg-gold mr-2"></i>Parámetros del Inversión
+                        </h3>
+                        <form id="van-form" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-300 mb-1">Inversión Inicial ($ / Q)</label>
+                                <input type="number" id="inversion" value="50000" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:border-umg-gold focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-300 mb-1">Tasa de Descuento (%)</label>
+                                <input type="number" id="tasa" value="10" step="0.1" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:border-umg-gold focus:outline-none">
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-300 mb-1">Flujo Año 1</label>
+                                    <input type="number" id="flujo1" value="15000" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:border-umg-gold focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-300 mb-1">Flujo Año 2</label>
+                                    <input type="number" id="flujo2" value="18000" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:border-umg-gold focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-300 mb-1">Flujo Año 3</label>
+                                    <input type="number" id="flujo3" value="22000" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:border-umg-gold focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-300 mb-1">Flujo Año 4</label>
+                                    <input type="number" id="flujo4" value="25000" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:border-umg-gold focus:outline-none">
+                                </div>
+                            </div>
+                            <button type="button" onclick="calcularVAN()" class="w-full gold-gradient text-umg-blue font-bold py-3 rounded-lg shadow-lg hover:brightness-110 transition-all mt-4">
+                                Calcular Evaluación
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Output & Visuals -->
+                    <div class="lg:col-span-7 bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-lg space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 text-center">
+                                <span class="text-xs text-slate-400 block mb-1">Valor Actual Neto (VAN)</span>
+                                <span id="van-result" class="text-2xl font-extrabold text-green-400">Q 0.00</span>
+                            </div>
+                            <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 text-center">
+                                <span class="text-xs text-slate-400 block mb-1">Tasa Interna de Retorno (TIR)</span>
+                                <span id="tir-result" class="text-2xl font-extrabold text-umg-gold">0.00%</span>
+                            </div>
+                        </div>
+
+                        <!-- Dictamen final -->
+                        <div id="dictamen-van" class="p-4 rounded-xl bg-green-500/10 border border-green-500/30 text-green-300 text-xs sm:text-sm">
+                            <i class="fa-solid fa-circle-check mr-2"></i><strong>Dictamen:</strong> Ingrese los datos para generar el dictamen gerencial.
+                        </div>
+
+                        <!-- Gráfico de flujos -->
+                        <div class="h-48 relative">
+                            <canvas id="chartVAN"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: COMPRAR VS PRODUCIR -->
+            <div id="tab-comprar" class="hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <!-- Form Control -->
+                    <div class="lg:col-span-5 bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-lg">
+                        <h3 class="text-lg font-bold text-white mb-4 flex items-center">
+                            <i class="fa-solid fa-scale-unbalanced text-umg-gold mr-2"></i>Costos de Fabricación y Compra
+                        </h3>
+                        <form class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-300 mb-1">Unidades Requeridas</label>
+                                <input type="number" id="unidades" value="5000" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:border-umg-gold focus:outline-none">
+                            </div>
+                            <div class="border-t border-slate-700 pt-3">
+                                <span class="text-xs font-bold text-umg-gold uppercase tracking-wider block mb-2">Opción Fabricar</span>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-300 mb-1">Costo Var. / Unid.</label>
+                                        <input type="number" id="costo-var-unit" value="12" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:border-umg-gold focus:outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-300 mb-1">Costos Fijos Asignados</label>
+                                        <input type="number" id="costo-fijo-total" value="15000" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:border-umg-gold focus:outline-none">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-t border-slate-700 pt-3">
+                                <span class="text-xs font-bold text-umg-gold uppercase tracking-wider block mb-2">Opción Comprar (Proveedor)</span>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-300 mb-1">Precio Unitario del Proveedor</label>
+                                    <input type="number" id="precio-proveedor" value="14" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:border-umg-gold focus:outline-none">
+                                </div>
+                            </div>
+                            <button type="button" onclick="calcularComprarVsProducir()" class="w-full gold-gradient text-umg-blue font-bold py-3 rounded-lg shadow-lg hover:brightness-110 transition-all mt-4">
+                                Evaluar Decisión
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Output Decision -->
+                    <div class="lg:col-span-7 bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-lg space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 text-center">
+                                <span class="text-xs text-slate-400 block mb-1">Costo Total Fabricar</span>
+                                <span id="costo-fabricar-res" class="text-2xl font-extrabold text-blue-400">Q 0.00</span>
+                            </div>
+                            <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 text-center">
+                                <span class="text-xs text-slate-400 block mb-1">Costo Total Comprar</span>
+                                <span id="costo-comprar-res" class="text-2xl font-extrabold text-yellow-400">Q 0.00</span>
+                            </div>
+                        </div>
+
+                        <div id="dictamen-comprar" class="p-4 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs sm:text-sm">
+                            <i class="fa-solid fa-info-circle mr-2"></i> Ingrese los datos para obtener el análisis marginal.
+                        </div>
+
+                        <div class="h-48 relative">
+                            <canvas id="chartComprar"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-umg-blue text-white py-10 border-t border-blue-900 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-2">Universidad Mariano Gálvez</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Facultad de Ciencias Económicas.<br>
+                        Curso: Contabilidad Administrativa.<br>
+                        Recurso digital diseñado para la presentación académica de contenidos.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-2">Enlaces Rápido</h4>
+                    <ul class="text-xs space-y-1.5 text-slate-300">
+                        <li><a href="#fundamentos" class="hover:text-umg-gold">Fundamentos Web</a></li>
+                        <li><a href="#teoria" class="hover:text-umg-gold">Aspectos Teóricos</a></li>
+                        <li><a href="#herramientas" class="hover:text-umg-gold">Herramientas de Gestión</a></li>
+                        <li><a href="#calculadoras" class="hover:text-umg-gold">Calculadoras VAN / TIR</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-2">Compromiso Académico</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Desarrollado bajo principios de accesibilidad, adaptabilidad web y diseño centrado en el usuario (UX/UI).
+                    </p>
+                </div>
+            </div>
+            <div class="border-t border-blue-900/60 pt-6 text-center text-xs text-slate-400">
+                <p>&copy; 2026 Universidad Mariano Gálvez de Guatemala. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LOGIC JS -->
+    <script>
+        // Toggle Menu Mobile
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Tabs
+        function switchTab(tab) {
+            const tabVan = document.getElementById('tab-van');
+            const tabComprar = document.getElementById('tab-comprar');
+            const btnVan = document.getElementById('tab-van-btn');
+            const btnComprar = document.getElementById('tab-comprar-btn');
+
+            if (tab === 'van') {
+                tabVan.classList.remove('hidden');
+                tabComprar.classList.add('hidden');
+                btnVan.classList.add('active', 'text-white');
+                btnVan.classList.remove('text-slate-400');
+                btnComprar.classList.remove('active', 'text-white');
+                btnComprar.classList.add('text-slate-400');
+            } else {
+                tabVan.classList.add('hidden');
+                tabComprar.classList.remove('hidden');
+                btnComprar.classList.add('active', 'text-white');
+                btnComprar.classList.remove('text-slate-400');
+                btnVan.classList.remove('active', 'text-white');
+                btnVan.classList.add('text-slate-400');
+            }
+        }
+
+        // --- CALCULADORA 1: VAN Y TIR ---
+        let chartVANInstance = null;
+
+        function calcularVAN() {
+            const inversion = parseFloat(document.getElementById('inversion').value) || 0;
+            const tasa = (parseFloat(document.getElementById('tasa').value) || 0) / 100;
+            const f1 = parseFloat(document.getElementById('flujo1').value) || 0;
+            const f2 = parseFloat(document.getElementById('flujo2').value) || 0;
+            const f3 = parseFloat(document.getElementById('flujo3').value) || 0;
+            const f4 = parseFloat(document.getElementById('flujo4').value) || 0;
+
+            const flujos = [f1, f2, f3, f4];
+            
+            // Calculo VAN
+            let van = -inversion;
+            for (let i = 0; i < flujos.length; i++) {
+                van += flujos[i] / Math.pow(1 + tasa, i + 1);
+            }
+
+            // Calculo Aprox TIR (Método de Bisección)
+            let tir = 0;
+            let minRate = -0.99;
+            let maxRate = 2.0;
+            for (let iter = 0; iter < 100; iter++) {
+                let midRate = (minRate + maxRate) / 2;
+                let npv = -inversion;
+                for (let i = 0; i < flujos.length; i++) {
+                    npv += flujos[i] / Math.pow(1 + midRate, i + 1);
+                }
+                if (Math.abs(npv) < 0.0001) {
+                    tir = midRate;
+                    break;
+                }
+                if (npv > 0) {
+                    minRate = midRate;
+                } else {
+                    maxRate = midRate;
+                }
+                tir = midRate;
+            }
+
+            // Render Resultados
+            document.getElementById('van-result').innerText = `Q ${van.toLocaleString('es-GT', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            document.getElementById('tir-result').innerText = `${(tir * 100).toFixed(2)}%`;
+
+            const dictamen = document.getElementById('dictamen-van');
+            if (van > 0) {
+                dictamen.className = "p-4 rounded-xl bg-green-500/10 border border-green-500/30 text-green-300 text-xs sm:text-sm";
+                dictamen.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i><strong>PROYECTO VIABLE:</strong> El VAN es mayor a 0 y la TIR (${(tir*100).toFixed(2)}%) supera la tasa requerida de descuento (${(tasa*100).toFixed(1)}%). Se recomienda invertir.`;
+            } else {
+                dictamen.className = "p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-xs sm:text-sm";
+                dictamen.innerHTML = `<i class="fa-solid fa-triangle-exclamation mr-2"></i><strong>PROYECTO NO RECOMENDADO:</strong> El VAN es negativo. Los flujos no cubren el costo de capital exigido.`;
+            }
+
+            // Actualizar Gráfico
+            renderChartVAN([inversion, f1, f2, f3, f4]);
+        }
+
+        function renderChartVAN(datosFlujo) {
+            const ctx = document.getElementById('chartVAN').getContext('2d');
+            if (chartVANInstance) chartVANInstance.destroy();
+
+            chartVANInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Año 0 (Inversión)', 'Año 1', 'Año 2', 'Año 3', 'Año 4'],
+                    datasets: [{
+                        label: 'Flujo de Caja (Q)',
+                        data: [-datosFlujo[0], datosFlujo[1], datosFlujo[2], datosFlujo[3], datosFlujo[4]],
+                        backgroundColor: [-datosFlujo[0] < 0 ? '#ef4444' : '#22c55e', '#3b82f6', '#3b82f6', '#3b82f6', '#3b82f6']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { ticks: { color: '#94a3b8' }, grid: { color: '#334155' } },
+                        x: { ticks: { color: '#94a3b8' }, grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        // --- CALCULADORA 2: COMPRAR VS PRODUCIR ---
+        let chartComprarInstance = null;
+
+        function calcularComprarVsProducir() {
+            const unidades = parseFloat(document.getElementById('unidades').value) || 0;
+            const costoVarUnit = parseFloat(document.getElementById('costo-var-unit').value) || 0;
+            const costoFijo = parseFloat(document.getElementById('costo-fijo-total').value) || 0;
+            const precioProv = parseFloat(document.getElementById('precio-proveedor').value) || 0;
+
+            const costoTotalFabricar = (unidades * costoVarUnit) + costoFijo;
+            const costoTotalComprar = unidades * precioProv;
+
+            document.getElementById('costo-fabricar-res').innerText = `Q ${costoTotalFabricar.toLocaleString('es-GT', {minimumFractionDigits: 2})}`;
+            document.getElementById('costo-comprar-res').innerText = `Q ${costoTotalComprar.toLocaleString('es-GT', {minimumFractionDigits: 2})}`;
+
+            const dictamen = document.getElementById('dictamen-comprar');
+            const diferencia = Math.abs(costoTotalFabricar - costoTotalComprar);
+
+            if (costoTotalFabricar < costoTotalComprar) {
+                dictamen.className = "p-4 rounded-xl bg-green-500/10 border border-green-500/30 text-green-300 text-xs sm:text-sm";
+                dictamen.innerHTML = `<i class="fa-solid fa-gears mr-2"></i><strong>DECISIÓN: PRODUCIR INTERNAMENTE.</strong> Es más económico fabricar las ${unidades} unidades, generando un ahorro de Q ${diferencia.toLocaleString('es-GT', {minimumFractionDigits: 2})}.`;
+            } else {
+                dictamen.className = "p-4 rounded-xl bg-yellow-500/10 border border-yellow-500/30 text-yellow-300 text-xs sm:text-sm";
+                dictamen.innerHTML = `<i class="fa-solid fa-truck-ramp-box mr-2"></i><strong>DECISIÓN: COMPRAR A PROVEEDOR.</strong> Adquirir externamente reduce el costo total en Q ${diferencia.toLocaleString('es-GT', {minimumFractionDigits: 2})}, ahorrando costos fijos.`;
+            }
+
+            renderChartComprar(costoTotalFabricar, costoTotalComprar);
+        }
+
+        function renderChartComprar(fabricar, comprar) {
+            const ctx = document.getElementById('chartComprar').getContext('2d');
+            if (chartComprarInstance) chartComprarInstance.destroy();
+
+            chartComprarInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Fabricar Internamente', 'Comprar a Proveedor'],
+                    datasets: [{
+                        label: 'Costo Total (Q)',
+                        data: [fabricar, comprar],
+                        backgroundColor: ['#60a5fa', '#facc15']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { ticks: { color: '#94a3b8' }, grid: { color: '#334155' } },
+                        x: { ticks: { color: '#94a3b8' }, grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        // On Load Init
+        window.onload = function() {
+            calcularVAN();
+            calcularComprarVsProducir();
+        };
+    </script>
+</body>
+</html>
